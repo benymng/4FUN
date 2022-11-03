@@ -114,7 +114,7 @@ String sendData(String command, const int timeout, boolean debug)
 void InitWifiModule()
 {
   sendData("AT+RST\r\n", 2000, DEBUG);                                                  
-  sendData("AT+CWJAP=\"Norm\",\"normanch\"\r\n", 2000, DEBUG);        
+  sendData("AT+CWJAP=\"Ben\",\"abc123abc123\"\r\n", 2000, DEBUG);        
   delay (3000);
   sendData("AT+CWMODE=1\r\n", 1500, DEBUG);                                             
   delay (1500);
