@@ -112,18 +112,18 @@ void loop() {
   // print the sensor data to serial
   String accelOutput = " Xraw = ";
   accelOutput.concat(rawAccel.XAxis);
-  // accelOutput.concat(" Yraw = ");
-  // accelOutput.concat(rawAccel.YAxis);
-  // accelOutput.concat(" Zraw = ");
-  // accelOutput.concat(rawAccel.ZAxis);
+  accelOutput.concat(" Yraw = ");
+  accelOutput.concat(rawAccel.YAxis);
+  accelOutput.concat(" Zraw = ");
+  accelOutput.concat(rawAccel.ZAxis);
 
-  // accelOutput.concat(" Xnorm = ");
-  // accelOutput.concat(normAccel.XAxis);
-  // accelOutput.concat(" Ynorm = ");
-  // accelOutput.concat(normAccel.YAxis);
-  // accelOutput.concat(" Znorm = ");
-  // accelOutput.concat(normAccel.ZAxis);
-  // accelOutput.concat("\n");
+  accelOutput.concat(" Xnorm = ");
+  accelOutput.concat(normAccel.XAxis);
+  accelOutput.concat(" Ynorm = ");
+  accelOutput.concat(normAccel.YAxis);
+  accelOutput.concat(" Znorm = ");
+  accelOutput.concat(normAccel.ZAxis);
+  accelOutput.concat("\n");
 
   // if esp8266 is conncted
   if(esp8266.available()) {    
