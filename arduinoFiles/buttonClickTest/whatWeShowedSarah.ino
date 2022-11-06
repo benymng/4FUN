@@ -53,12 +53,13 @@ void loop() {
   // compare the buttonState to its previous state
   if(buttonState != lastButtonState) {
     lastButtonState = buttonState;
+    buttonPushCounter += 1;
       if(buttonState == HIGH) {
-        Serial.println ("turned LED on");
+        Serial.println ("turned LED off");
         digitalWrite(ledPin, LOW);
       }
       else {
-        Serial.println("turned LED off");
+        Serial.println("turned LED on");
         digitalWrite(ledPin, HIGH);
       }
       delay(50);
@@ -119,13 +120,13 @@ String sendData(String command, const int timeout, boolean debug) {
 void InitWifiModule() {
   sendData("AT+RST\r\n", 2000, DEBUG);     
   sendData("AT+CWMODE=1\r\n", 1500, DEBUG);                                             
-  delay (10000);                                             
+  delay (20000);                                             
   sendData("AT+CWJAP=\"emma\",\"emmaiscool\"\r\n", 2000, DEBUG);        
-  delay (10000);
+  delay (20000);
   sendData("AT+CIFSR\r\n", 1500, DEBUG);                                             
-  delay (10000);
+  delay (20000);
   sendData("AT+CIPMUX=1\r\n", 1500, DEBUG);                                             
-  delay (10000);
+  delay (20000);
   sendData("AT+CIPSERVER=1,80\r\n", 1500, DEBUG);                                     
 
 }
