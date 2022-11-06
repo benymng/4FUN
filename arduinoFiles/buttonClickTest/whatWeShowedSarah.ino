@@ -28,10 +28,10 @@ void loop() {
   if(esp8266.available()) {    
    // connect to wireless stuff
     if(esp8266.find("+IPD,")) {
-     delay(1000);
+     delay(2000);
  
      int connectionId = esp8266.read()-48;                                                
-     String webpage = "<h1>For Fun!</h1>";
+     String webpage = String(buttonPushCounter);
      String cipSend = "AT+CIPSEND=";
      cipSend += connectionId;
      cipSend += ",";
@@ -66,6 +66,7 @@ void loop() {
 
   // if (buttonState != lastButtonState) {
   //     // if the state has changed, increment the counter.
+  //      buttonPushCounter += 1;
     
   //   if (buttonState == HIGH) {
   //     // if the current state is HIGH then the button went from off to on:
@@ -77,15 +78,15 @@ void loop() {
   //     // if the current state is LOW then the button went from on to off:
   //   Serial.println("off");
   //   }
-    // Delay a little bit to avoid bouncing
+  //   // Delay a little bit to avoid bouncing
   //   delay(50);
   // }
-  // save the current state as the last state, for next time through the loop
-  // lastButtonState = buttonState;
+  // // save the current state as the last state, for next time through the loop
+  // // lastButtonState = buttonState;
 
-  // turns on the LED every four button pushes by checking the modulo of the
-  // button push counter. the modulo function gives you the remainder of the
-  // division of two numbers:
+  // // turns on the LED every four button pushes by checking the modulo of the
+  // // button push counter. the modulo function gives you the remainder of the
+  // // division of two numbers:
   // if (buttonPushCounter % 4 == 0) {
   //   digitalWrite(ledPin, HIGH);
   // } else {
@@ -116,15 +117,15 @@ String sendData(String command, const int timeout, boolean debug) {
 }
 
 void InitWifiModule() {
-  sendData("AT+RST\r\n", 2000, DEBUG);                                                  
-  sendData("AT+CWJAP=\"Norm\",\"normanch\"\r\n", 2000, DEBUG);        
-  delay (5000);
+  sendData("AT+RST\r\n", 2000, DEBUG);     
   sendData("AT+CWMODE=1\r\n", 1500, DEBUG);                                             
-  delay (5000);
+  delay (10000);                                             
+  sendData("AT+CWJAP=\"emma\",\"emmaiscool\"\r\n", 2000, DEBUG);        
+  delay (10000);
   sendData("AT+CIFSR\r\n", 1500, DEBUG);                                             
-  delay (5000);
+  delay (10000);
   sendData("AT+CIPMUX=1\r\n", 1500, DEBUG);                                             
-  delay (5000);
+  delay (10000);
   sendData("AT+CIPSERVER=1,80\r\n", 1500, DEBUG);                                     
 
 }
