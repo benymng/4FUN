@@ -35,39 +35,28 @@ void loop()
   // while (1)
   // {
   //   b++;
-  delay(5000);
-    if (comm.available())
-    {
-          Serial.println("Here");
+  buttonState = digitalRead(buttonPin);
+  if(buttonState != lastButtonState) buttonPushCounter++;
+  if(comm.availableForWrite()) {
+    Serial.println("avaliable for write");
+    sendNum (String(buttonPushCounter));
+    Serial.println("finished updating count");
+  }
+  // if (comm.available())
+  // {
+  //   Serial.println("Here");
 
-      // if (comm.find("0,CONNECT"))
-      // {
-        Serial.println("Starting");
-        sendToServer();
-        Serial.println("Finished");
-        delay(1000);
-      }
+  //     // if (comm.find("0,CONNECT"))
+  //     // {
+  //       Serial.println("Starting");
+  //       sendToServer();
+  //       Serial.println("Finished");
+  //       delay(1000);
+  //     }
     // }
   // }
-
-  buttonState = digitalRead(buttonPin);
-  // compare the buttonState to its previous state
-  // Serial.println(buttonState);
-  if(buttonState != lastButtonState) {
-    lastButtonState = buttonState;
-    buttonPushCounter += 1;
-    comm.print("ButtonPress");
-      if(buttonState == HIGH) {
-        Serial.println ("turned LED off");
-        digitalWrite(ledPin, LOW);
-      }
-      else {
-        Serial.println("turned LED on");
-        digitalWrite(ledPin, HIGH);
-      }
-      delay(50);
   }
-}
+
 
 
 void findIp(int time1) //check for the availability of IP Address
@@ -203,4 +192,13 @@ void sendToServer()//send data to webpage
   sendData(server);
   delay(5000);
   comm.println("AT+CIPCLOSE=0");
+}
+
+void sendNum(String s)//send data to webpage
+{
+  server += s + '\n';
+  sendData(server);
+  delay(5000);
+  comm.println("AT+CIPCLOSE=0");
+  Serial.println("finished sending numbers");
 }
