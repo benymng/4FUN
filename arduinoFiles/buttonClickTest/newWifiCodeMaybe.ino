@@ -14,8 +14,8 @@ String str2 = "<p>Data Received Successfully.....</p>"; //another string to disp
 
 void setup()
 {
-  Serial.begin(9600);
-  comm.begin(9600);
+  Serial.begin(115200);
+  comm.begin(115200);
   wifi_init();
   Serial.println("System Ready..");
 }
