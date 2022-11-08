@@ -1,6 +1,7 @@
 #include<SoftwareSerial.h>
-// #include <Wire.h>
-// #include <MPU6050.h>       
+#include "functions.h"
+#include <Wire.h>
+#include <MPU6050.h>       
 SoftwareSerial comm(10, 11); //setting Tx and Rx pins
 
 String server = ""; //variable for sending data to webpage
@@ -21,7 +22,7 @@ int buttonState = 0;        // current state of the button
 int lastButtonState = 0;    // previous state of the button
 
 // MPU6050
-// MPU6050 mpu;
+MPU6050 mpu;
 
 String str1 = "Button push counter here"; //String to display on webpage
 // String accelOutput = "none";
@@ -35,55 +36,54 @@ void setup()
   comm.begin(115200);
   wifi_init();
   Serial.println("System Ready..");
-  // detect if the MPU6050 accelerometer is connected
-  // while(!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G)) {
-  //   Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
-  // }
 
-  // // check the setting to see if its properly initialized
-  // checkSettings();    
+  // detect if the MPU6050 accelerometer is connected
+  while(!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G)) {
+    Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
+  }
+
+  // check the setting to see if its properly initialized
+  checkSettings();    
 }
 
 // check the settings of the accelerometer
-// void checkSettings() {
-//   Serial.println();
-//   Serial.print(" * Sleep Mode:            ");
-//   Serial.println(mpu.getSleepEnabled() ? "Enabled" : "Disabled");
+void checkSettings() {
+  Serial.println();
+  Serial.print(" * Sleep Mode:            ");
+  Serial.println(mpu.getSleepEnabled() ? "Enabled" : "Disabled");
 
-//   Serial.print(" * Clock Source:          ");
-//   switch(mpu.getClockSource()) {
-//     case MPU6050_CLOCK_KEEP_RESET:     Serial.println("Stops the clock and keeps the timing generator in reset"); break;
-//     case MPU6050_CLOCK_EXTERNAL_19MHZ: Serial.println("PLL with external 19.2MHz reference"); break;
-//     case MPU6050_CLOCK_EXTERNAL_32KHZ: Serial.println("PLL with external 32.768kHz reference"); break;
-//     case MPU6050_CLOCK_PLL_ZGYRO:      Serial.println("PLL with Z axis gyroscope reference"); break;
-//     case MPU6050_CLOCK_PLL_YGYRO:      Serial.println("PLL with Y axis gyroscope reference"); break;
-//     case MPU6050_CLOCK_PLL_XGYRO:      Serial.println("PLL with X axis gyroscope reference"); break;
-//     case MPU6050_CLOCK_INTERNAL_8MHZ:  Serial.println("Internal 8MHz oscillator"); break;
-//   }
-//   Serial.print(" * Accelerometer:         ");
-//   switch(mpu.getRange()) {
-//     case MPU6050_RANGE_16G:            Serial.println("+/- 16 g"); break;
-//     case MPU6050_RANGE_8G:             Serial.println("+/- 8 g"); break;
-//     case MPU6050_RANGE_4G:             Serial.println("+/- 4 g"); break;
-//     case MPU6050_RANGE_2G:             Serial.println("+/- 2 g"); break;
-//   }  
-//   Serial.print(" * Accelerometer offsets: ");
-//   Serial.print(mpu.getAccelOffsetX());
-//   Serial.print(" / ");
-//   Serial.print(mpu.getAccelOffsetY());
-//   Serial.print(" / ");
-//   Serial.println(mpu.getAccelOffsetZ());
+  Serial.print(" * Clock Source:          ");
+  switch(mpu.getClockSource()) {
+    case MPU6050_CLOCK_KEEP_RESET:     Serial.println("Stops the clock and keeps the timing generator in reset"); break;
+    case MPU6050_CLOCK_EXTERNAL_19MHZ: Serial.println("PLL with external 19.2MHz reference"); break;
+    case MPU6050_CLOCK_EXTERNAL_32KHZ: Serial.println("PLL with external 32.768kHz reference"); break;
+    case MPU6050_CLOCK_PLL_ZGYRO:      Serial.println("PLL with Z axis gyroscope reference"); break;
+    case MPU6050_CLOCK_PLL_YGYRO:      Serial.println("PLL with Y axis gyroscope reference"); break;
+    case MPU6050_CLOCK_PLL_XGYRO:      Serial.println("PLL with X axis gyroscope reference"); break;
+    case MPU6050_CLOCK_INTERNAL_8MHZ:  Serial.println("Internal 8MHz oscillator"); break;
+  }
+  Serial.print(" * Accelerometer:         ");
+  switch(mpu.getRange()) {
+    case MPU6050_RANGE_16G:            Serial.println("+/- 16 g"); break;
+    case MPU6050_RANGE_8G:             Serial.println("+/- 8 g"); break;
+    case MPU6050_RANGE_4G:             Serial.println("+/- 4 g"); break;
+    case MPU6050_RANGE_2G:             Serial.println("+/- 2 g"); break;
+  }  
+  Serial.print(" * Accelerometer offsets: ");
+  Serial.print(mpu.getAccelOffsetX());
+  Serial.print(" / ");
+  Serial.print(mpu.getAccelOffsetY());
+  Serial.print(" / ");
+  Serial.println(mpu.getAccelOffsetZ());
 
-//   Serial.println();
-// }
+  Serial.println();
+}
 
 void loop()
 {
-  b = 0;
-  // Serial.println("Refresh Page");
-  // while (1)
-  // {
-  //   b++;
+  if(Serial) {
+
+  }
   Serial.write(1);
   Serial.print(comm.read());
     if (comm.availableForWrite())
