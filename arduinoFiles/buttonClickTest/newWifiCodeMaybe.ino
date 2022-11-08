@@ -68,7 +68,21 @@ void loop()
       }
       delay(50);
   }
-}
+  // if (comm.available())
+  // {
+  //   Serial.println("Here");
+
+  //     // if (comm.find("0,CONNECT"))
+  //     // {
+  //       Serial.println("Starting");
+  //       sendToServer();
+  //       Serial.println("Finished");
+  //       delay(1000);
+  //     }
+    // }
+  // }
+  }
+
 
 
 void findIp(int time1) //check for the availability of IP Address
@@ -197,11 +211,20 @@ void sendData(String server1)//send data to module
 
 void sendToServer()//send data to webpage
 {
-  server = "<h1>HI</h1>";
+  server = "<h1>Welcome to Data Receiving from Arduino</h1>";
   sendData(server);
   server = String(buttonPushCounter);
   server += str2;
   sendData(server);
   delay(1000);
   comm.println("AT+CIPCLOSE=0");
+}
+
+void sendNum(String s)//send data to webpage
+{
+  server += s + '\n';
+  sendData(server);
+  delay(5000);
+  comm.println("AT+CIPCLOSE=0");
+  Serial.println("finished sending numbers");
 }
