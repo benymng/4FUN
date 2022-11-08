@@ -85,7 +85,7 @@ void loop()
   // {
     Serial.println("Ready to go");
     b++;
-    if (comm.availableForWrite())
+    if (comm.avaliable())
     {
           Serial.println("Here");
 
