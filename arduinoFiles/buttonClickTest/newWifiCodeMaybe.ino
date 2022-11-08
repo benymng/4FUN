@@ -9,7 +9,15 @@ char temp1 = '0';
 int a = 0;
 int b = 0;
 
-String str1 = "<p>I am Arduino</p>"; //String to display on webpage
+// Button
+const int buttonPin = 2;  // the pin that the pushbutton is attached to
+const int ledPin = 12;    // the pin that the LED is attached to
+int buttonPushCounter = 0;  // counter for the number of button presses
+int buttonState = 0;        // current state of the button
+int lastButtonState = 0;    // previous state of the button
+
+
+String str1 = String(buttonPushCounter); //String to display on webpage
 String str2 = "<p>Data Received Successfully.....</p>"; //another string to display on webpage
 
 void setup()
@@ -23,21 +31,41 @@ void setup()
 void loop()
 {
   b = 0;
-  Serial.println("Refresh Page");
-  while (b < 1000)
-  {
-    b++;
-    while (comm.available())
+  // Serial.println("Refresh Page");
+  // while (1)
+  // {
+  //   b++;
+  delay(5000);
+    if (comm.available())
     {
-      if (comm.find("0,CONNECT"))
-      {
+          Serial.println("Here");
+
+      // if (comm.find("0,CONNECT"))
+      // {
         Serial.println("Starting");
         sendToServer();
         Serial.println("Finished");
         delay(1000);
       }
-    }
-    delay(1);
+    // }
+  // }
+
+  buttonState = digitalRead(buttonPin);
+  // compare the buttonState to its previous state
+  // Serial.println(buttonState);
+  if(buttonState != lastButtonState) {
+    lastButtonState = buttonState;
+    buttonPushCounter += 1;
+    comm.print("ButtonPress");
+      if(buttonState == HIGH) {
+        Serial.println ("turned LED off");
+        digitalWrite(ledPin, LOW);
+      }
+      else {
+        Serial.println("turned LED on");
+        digitalWrite(ledPin, HIGH);
+      }
+      delay(50);
   }
 }
 
@@ -168,7 +196,7 @@ void sendData(String server1)//send data to module
 
 void sendToServer()//send data to webpage
 {
-  server = "<h1>Welcome to Data Receiving from Arduino</h1>";
+  server = "<h1>HI</h1>";
   sendData(server);
   server = str1;
   server += str2;
