@@ -5,6 +5,8 @@ String server = ""; //variable for sending data to webpage
 boolean No_IP = false; //variable to check for ip Address
 String IP = ""; //variable to store ip Address
 char temp1 = '0';
+const String SSID = "emma";
+const String PWD = "emmaiscool";
 
 int a = 0;
 int b = 0;
@@ -12,12 +14,12 @@ int b = 0;
 // Button
 const int buttonPin = 2;  // the pin that the pushbutton is attached to
 const int ledPin = 12;    // the pin that the LED is attached to
-int buttonPushCounter = 0;  // counter for the number of button presses
+int buttonPushCounter = 1;  // counter for the number of button presses
 int buttonState = 0;        // current state of the button
 int lastButtonState = 0;    // previous state of the button
 
 
-String str1 = String(buttonPushCounter); //String to display on webpage
+String str1 = "Button push counter here"; //String to display on webpage
 String str2 = "<p>Data Received Successfully.....</p>"; //another string to display on webpage
 
 void setup()
@@ -34,9 +36,8 @@ void loop()
   // Serial.println("Refresh Page");
   // while (1)
   // {
-  //   b++;
-  delay(5000);
-    if (comm.available())
+    b++;
+    if (comm.availableForWrite())
     {
           Serial.println("Here");
 
@@ -46,8 +47,8 @@ void loop()
         sendToServer();
         Serial.println("Finished");
         delay(1000);
-      }
-    // }
+      // }
+    }
   // }
 
   buttonState = digitalRead(buttonPin);
@@ -56,7 +57,7 @@ void loop()
   if(buttonState != lastButtonState) {
     lastButtonState = buttonState;
     buttonPushCounter += 1;
-    comm.print("ButtonPress");
+    Serial.println(buttonPushCounter);
       if(buttonState == HIGH) {
         Serial.println ("turned LED off");
         digitalWrite(ledPin, LOW);
@@ -155,7 +156,7 @@ void wifi_init() //send AT commands to module
   if (!No_IP)
   {
     Serial.println("Connecting Wifi....");
-    establishConnection("AT+CWJAP=\"Norm\",\"normanch\"", 7000); //provide your WiFi username and password here
+    establishConnection("AT+CWJAP=\"" + SSID + "\",\"" + PWD + "\"", 7000); //provide your WiFi username and password here
   }
   else
   {
@@ -198,9 +199,9 @@ void sendToServer()//send data to webpage
 {
   server = "<h1>HI</h1>";
   sendData(server);
-  server = str1;
+  server = String(buttonPushCounter);
   server += str2;
   sendData(server);
-  delay(5000);
+  delay(1000);
   comm.println("AT+CIPCLOSE=0");
 }
