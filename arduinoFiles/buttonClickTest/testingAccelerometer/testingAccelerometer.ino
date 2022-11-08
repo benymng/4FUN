@@ -14,7 +14,7 @@ const String PWD = "normanch";
 int a = 0;
 int b = 0;
 
-// Button
+// Button0
 const int buttonPin = 2;  // the pin that the pushbutton is attached to
 const int ledPin = 12;    // the pin that the LED is attached to
 int buttonPushCounter = 1;  // counter for the number of button presses
