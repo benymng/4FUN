@@ -18,7 +18,7 @@ accel = []
 
 def main():
     getData()
-    
+
     # database part
     load_dotenv()
 
@@ -60,6 +60,7 @@ def getData():
         item = one.get_text()
         accel.append(float(item))
         print(item)
+        insert_into_database(item)
         
     
 if __name__ == '__main__':
