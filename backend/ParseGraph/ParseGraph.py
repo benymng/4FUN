@@ -1,6 +1,6 @@
 # author: alex zhu and ben ng
 # date: nov 8, 2022
-# parses from site and graphs data
+# parses from site and graphs data OBSOLETE FILE
 
 import os
 from bs4 import BeautifulSoup

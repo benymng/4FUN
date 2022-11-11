@@ -1,5 +1,5 @@
 # author: alex zhu and ben ng
-# date: nov 10, 2022
+# date: nov 11, 2022
 # parses from site and graphs data: 1 of 2 files for prototype
 
 from pymongo import MongoClient
@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 # use source env/bin/activate to activate environment
 
 # number of data points
-LENGTH = 5
+LENGTH = 10
 accel = []
 
 def main():
@@ -26,7 +26,7 @@ def main():
     print(accel)
 
     # some sample code
-    x = np.arange(0, LENGTH)
+    x = np.arange(1, LENGTH + 1)
     y = np.array(accel)
 
     plt.title("Accelerometer data") 
@@ -47,12 +47,14 @@ def insert_into_database(item):
 
     # collection_name = dbname["testing"]
 
-    x = myCol.insert_one(item)
-    print(x.inserted_id)
+    # commented out for now because of credentials issue: hard code credentials and it works
+
+    # x = myCol.insert_one(item) 
+    # print(x.inserted_id)
     # collection_name.insert_one(item)
 
 def getData():
-    url = "http://127.0.0.1:5500/backend/ParseGraph/index.html"
+    url = "http://127.0.0.1:5500/backend/ParseGraph/index.html" # replace with IP from arduino
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     text = soup.find_all('h2')
