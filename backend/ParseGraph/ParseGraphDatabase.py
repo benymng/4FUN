@@ -54,7 +54,7 @@ def insert_into_database(item):
     # collection_name.insert_one(item)
 
 def getData():
-    url = "http://127.0.0.1:5500/backend/ParseGraph/" # replace with IP from arduino
+    url = "http://127.0.0.1:5500/backend/ParseGraph/index.html" # replace with IP from arduino
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     text = soup.find_all('h2')
