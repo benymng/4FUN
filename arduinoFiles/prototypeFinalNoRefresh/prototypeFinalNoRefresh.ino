@@ -102,7 +102,7 @@ void loop() {
     i++;
   }
   for (i=0; i<10; i++) {
-    str1 += "\n<h2>" + String(accelData[i]) + "<\h2>";
+    str1 += "\n<h2>" + String(accelData[i]) + "</h2>";
   }
   Serial.println("Starting");
   // Serial.println(str1);

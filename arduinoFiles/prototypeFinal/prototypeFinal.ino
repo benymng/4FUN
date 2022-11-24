@@ -16,6 +16,7 @@ int startTime = 0;
 int a = 0;
 int b = 0;
 
+// String str1 = "<HEAD><meta http-equiv=\"refresh\" content=\"5\"></head>\n";
 String str1 = "<HEAD><meta http-equiv=\"refresh\" content=\"5\"></head>\n";
 String str2 = "<p>Receiving data...</p>"; //another string to display on webpage
 double accelData[10] = {};
@@ -86,7 +87,8 @@ void checkSettings() {
 }
 
 void loop() {
-  str1 = "<HEAD><meta http-equiv=\"refresh\" content=\"11\"></head>";
+  // str1 = "<HEAD><meta http-equiv=\"refresh\" content=\"11\"></head>";
+  str1 = "";
   while(!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G)) {
     Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
     delay(5000);
@@ -100,7 +102,7 @@ void loop() {
     i++;
   }
   for (i=0; i<10; i++) {
-    str1 += "\n<h2>" + String(accelData[i]) + "<\h2>";
+    str1 += "\n<h2>" + String(accelData[i]) + "</h2>";
   }
   Serial.println("Starting");
   // Serial.println(str1);
