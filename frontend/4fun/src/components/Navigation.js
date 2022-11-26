@@ -13,7 +13,7 @@ export const Navigation = (props) => {
   ])
 
   return (
-    <div className="grid grid-cols-2 place-items-center gap-3">
+    <div className="grid grid-cols-2 place-items-center gap-3 self-end">
       {navBar.map(button =>
         <NavButton name={button.name} key={button.id} path={button.path} icon={button.icon} color={button.color} />)
       }
