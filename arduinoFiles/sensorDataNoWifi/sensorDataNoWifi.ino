@@ -32,7 +32,6 @@ void loop() {
     delay(5000);
   }
   printAccelData();
-  // printUltrasonicData();
 }
 
 void printAccelData () {
