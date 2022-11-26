@@ -16,14 +16,6 @@ MPU6050 mpu;
 
 void setup() {
   Serial.begin(115200);
-  // checkSettings();
-
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-
-  Serial.println("Ultrasonic Sensor HC-SR04 Test");
-  Serial.println("with Arduino UNO R3");
-  Serial.println("System Ready..");
 }
 
 void loop() {
@@ -43,26 +35,6 @@ void printAccelData () {
   Serial.print(normAccel.ZAxis);
   Serial.println();
   Serial.println();
-}
-
-void printUltrasonicData () {
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-
-  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
-  
-  // Calculating the distance
-  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-  // Displays the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.print(distance);
-  Serial.println(" cm");
 }
 
 void checkSettings() {
