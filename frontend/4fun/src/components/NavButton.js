@@ -7,12 +7,18 @@ export const NavButton = (props) => {
         name: props.name,
         path: props.path,
         icon: props.icon,
-        color: props.color ? "text-green outline-green hover:bg-green" : "text-white outline-white hover:bg-white"
+        color: props.color ? "text-green outline-green hover:bg-green" : "text-white outline-white hover:bg-white",
+        params: props.params
     });
 
     let navigate = useNavigate();
     const routeChange = () => {
-        navigate(State.path);
+        navigate(State.path, {
+            state: {
+                goal: State.params
+            }
+        });
+        props.func();
     }
 
     return (
@@ -25,8 +31,8 @@ export const NavButton = (props) => {
             grid grid-flow-col auto-cols-auto items-center gap-4 ` + State.color}>
                 {React.createElement(State.icon, { style: { fontSize: "1.8rem"}})}
                 <div className="col-span-3">{props.name}</div>
-        </button>
-            </div>
+            </button>
+        </div>
     )
 }
 

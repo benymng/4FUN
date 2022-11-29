@@ -3,14 +3,26 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 
 export const Button = (props) => {
-    const [State, setState] = useState({
+    const [buttonState, setButtonState] = useState({
         name: props.name,
         path: props.path,
+        goal: props.goal,
+        startTime: props.time
     });
+    useEffect(() => {
+        setButtonState(buttonState => ({
+            ...buttonState, ...{ goal: props.goal}
+        }));
+    }, [props.goal]);
 
     let navigate = useNavigate();
     const routeChange = () => {
-        navigate(State.path);
+        navigate(buttonState.path, {
+            state: {
+                goal: buttonState.goal,
+                startTime: buttonState.startTime
+            }
+        });
     }
 
     return (
@@ -22,7 +34,7 @@ export const Button = (props) => {
             outline outline-3 outline-darkGrey
             grid grid-flow-col auto-cols-auto items-center gap-4 `}>
                 <div className="col-span-3">{props.name}</div>
-        </button>
+            </button>
             </div>
     )
 }
