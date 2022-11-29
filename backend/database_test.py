@@ -13,14 +13,14 @@ def main():
 
 
 def get_database():
-    CONNECTION_STRING = (f'mongodb+srv://Ben:{os.getenv("MONGO_PASSWORD")}@cluster0.qtjn2.mongodb.net/?retryWrites=true&w=majority')
+    CONNECTION_STRING = (f'mongodb+srv://PASSWORD@cluster0.qtjn2.mongodb.net/?retryWrites=true&w=majority')
     client = MongoClient(CONNECTION_STRING)
     # print(client.list_database_names())
     return client['4FUN']
 
 def insert_into_database(item):
     dbname = get_database()
-    myCol = dbname["newTest"]
+    myCol = dbname["test"]
 
     # collection_name = dbname["testing"]
 
