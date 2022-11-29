@@ -10,8 +10,6 @@ def main():
     load_dotenv()
     getData()
 
-
-
 def get_database():
     CONNECTION_STRING = (f'mongodb+srv://PASSWORD@cluster0.qtjn2.mongodb.net/?retryWrites=true&w=majority')
     client = MongoClient(CONNECTION_STRING)
