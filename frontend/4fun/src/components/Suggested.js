@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Goal from './Goal'
 import { IoFootstepsOutline } from "react-icons/io5";
 
-export const Suggested = () => {
+export const Suggested = (props) => {
     const [goals, setGoals] = useState([
         { name: "Beginner", id: 1, repxsets: "3x5", icon: IoFootstepsOutline, selected: true},
         { name: "Intermediate", id: 2, repxsets: "4x8", icon: IoFootstepsOutline, selected: false },
@@ -15,13 +15,14 @@ export const Suggested = () => {
 
     useEffect(() => {
         setGoals(goals => goals.map(
-            goal => { 
+            goal => {
                 if (goal.id == selectedGoal) {
                     return { ...goal, selected: true };
-                } 
-                return { ...goal, selected: false};
+                }
+                return { ...goal, selected: false };
             }
-        ))
+        ));
+        props.setGoal(selectedGoal);
     }, [selectedGoal])
     
   return (

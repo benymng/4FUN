@@ -44,15 +44,15 @@ void loop() {
   }
 
   if(countTime > 25) {
-    Serial.println(countRep);
-    String fuckyou = "!" + String(countRep) + " ";
-    Serial.println(fuckyou);
+    // Serial.println(countRep);
+    String countRepString = "!" + String(countRep) + " ";
+    // Serial.println(countRepString);
     Serial.println("You have completed your set!");
     Serial.print("In this set, you did: ");
     Serial.print(countRep);
     Serial.println(" reps!");
 
-    String combined = fuckyou + toSend;
+    String combined = countRepString + toSend;
     Serial.println(combined);
     exit(0);
   }
