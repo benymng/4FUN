@@ -9,10 +9,9 @@ boolean No_IP = false;  //variable to check for ip Address
 String IP = "";         //variable to store ip Address
 char temp1 = '0';
 
-const String SSID = "petemango";
-const String PWD = "mangodatabase";
+const String SSID = "emma";
+const String PWD = "emmaiscool";
 int startTime = 0;
-
 int a = 0;
 int b = 0;
 
