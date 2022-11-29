@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>    
 #include <Wire.h>
-#include <MPU6050.h>  
+// #include <MPU6050.h>  
 
 SoftwareSerial comm(10, 11);
 #define echoPin 7 
@@ -22,7 +22,7 @@ String str2 = "<p>Data Received Successfully.....</p>";
 
 bool repRn = false;
 long duration=0;
-int distance=0, countRep=0, countTime=0;
+int distance=0, countRep=0, countTime=0, repDoneRemainingDist=0, initialDist=0;
 
 void setup() {
   pinMode(trigPin, OUTPUT); 
@@ -30,8 +30,21 @@ void setup() {
   Serial.begin(115200);
   comm.begin(115200);
 
+  // get rep done remaining distance
+  duration = pulseIn(echoPin, HIGH);
+  initialDist = duration * 0.034 / 2; 
+  repDoneRemainingDist = initialDist - 30;
+
   // wifi_init();
   Serial.println("System Ready..");
+
+  // flash for setup!
+  for(int i = 0; i < 8; i ++) {
+      digitalWrite(ledPin, HIGH);
+      delay(125);
+      digitalWrite(ledPin, LOW);
+      delay(125);
+    }
 }
 
 void loop() {
@@ -45,20 +58,24 @@ void loop() {
   duration = pulseIn(echoPin, HIGH);
   distance = duration * 0.034 / 2; 
 
-  if(distance < 15) {
-    digitalWrite(ledPin, LOW);
+  if(distance < repDoneRemainingDist) {
+    digitalWrite(ledPin, HIGH);
     repRn = true;
-    countTime++;
     toSend += distance;
     toSend += " ";
   }
-  else if(distance > 15 && repRn == true) {
+  else if(distance > repDoneRemainingDist && repRn == true) {
+    digitalWrite(ledPin, LOW);
     countRep++;
     repRn = false;
-    countTime=0;
     toSend += distance;
     toSend += " ";
-    digitalWrite(ledPin, HIGH);
+  }
+
+  if(distance > initialDist - 10) {
+    countTime++; // count time where weight is "resting"
+  } else {
+    countTime=0;
   }
 
   if(countTime > 25) {
@@ -69,19 +86,30 @@ void loop() {
     Serial.print("In this set, you did: ");
     Serial.print(countRep);
     Serial.println(" reps!");
-
-    String combined = countRepString + toSend;
-    Serial.println(combined);
-    // sendData(combined);
-    while(1) {
-      sendData(combined);
-
+    toSend = countRepString + toSend;
+    Serial.println(toSend);
+    // delay(300); // give it time to print before ending program
+    // flash!
+    for(int i = 0; i < 8; i ++) {
       digitalWrite(ledPin, HIGH);
-      delay(500);
+      delay(125);
       digitalWrite(ledPin, LOW);
-      
-      Serial.println("this shitty app do be still sending data");
+      delay(125);
     }
+    
+    exit(0);
+    // String combined = countRepString + toSend;
+    // Serial.println(combined);
+    // sendData(combined);
+    // while(1) {
+    //   sendData(combined);
+
+    //   digitalWrite(ledPin, HIGH);
+    //   delay(500);
+    //   digitalWrite(ledPin, LOW);
+      
+    //   Serial.println("this app do be still sending data");
+    // }
   }
   Serial.print("Distance: ");
   Serial.print(distance);
@@ -90,7 +118,7 @@ void loop() {
   toSend += distance;
   toSend += " ";
 
-  delay(100);
+  delay(88); // adds up to 100
 }
 
 void findIp(int time1)  //check for the availability of IP Address
