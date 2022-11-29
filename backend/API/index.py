@@ -27,12 +27,14 @@ def get_raw_data():
 def sendFilteredData():
     data = request.json
     CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
-    data = data["point"]
+    x = data["x"]
+    y = data["y"]
     client = MongoClient(CONNECTION_STRING)
     myCol = client['4FUN']
     table = myCol["filtered-data"]
     item = {
-        "data": data
+        "x": x,
+        "y": y
     }
     table.insert_one(item)
     return jsonify(data)
