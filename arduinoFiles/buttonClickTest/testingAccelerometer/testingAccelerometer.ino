@@ -79,6 +79,7 @@ void checkSettings() {
   Serial.println();
 }
 
+<<<<<<< Updated upstream
 void loop()
 {
   if(Serial) {
@@ -97,6 +98,25 @@ void loop()
         Serial.println("Finished");
         delay(1000);
       }
+=======
+void loop() {
+  // read what is in the buffer
+  Serial.println(comm.read());
+
+  Serial.println("Ready to go");
+  b++;
+  if (comm.available()) {
+    Serial.println("Here");
+    sendToServer();
+    Serial.println("Finished");
+    delay(1000);
+  }
+
+  Vector rawAccel = mpu.readRawAccel();
+  accelOutput = " Yraw = ";
+  accelOutput.concat(rawAccel.YAxis);
+  comm.println(accelOutput);
+>>>>>>> Stashed changes
 
 
   buttonState = digitalRead(buttonPin);
@@ -119,32 +139,24 @@ void loop()
 }
 
 
-void findIp(int time1) //check for the availability of IP Address
-{
+void findIp(int time1) {
   int time2 = millis();
-  while (time2 + time1 > millis())
-  {
-    while (comm.available() > 0)
-    {
-      if (comm.find("IP has been read"))
-      {
+  while (time2 + time1 > millis()) {
+    while (comm.available() > 0) {
+      if (comm.find("IP has been read")) {
         No_IP = true;
       }
     }
   }
 }
 
-void showIP()//Display the IP Address
-{
+void showIP() {
   IP = "";
   char ch = 0;
-  while (1)
-  {
+  while (1) {
     comm.println("AT+CIFSR");
-    while (comm.available() > 0)
-    {
-      if (comm.find("STAIP,"))
-      {
+    while (comm.available() > 0) {
+      if (comm.find("STAIP,")) {
         delay(1000);
         Serial.print("IP Address:");
         while (comm.available() > 0)
@@ -190,8 +202,7 @@ void establishConnection(String command, int timeOut) //Define the process for s
     Serial.println("Error");
 }
 
-void wifi_init() //send AT commands to module
-{
+bool wifi_init() {
   establishConnection("AT", 100);
   delay(1000);
   establishConnection("AT+CWMODE=3", 100);
@@ -200,14 +211,12 @@ void wifi_init() //send AT commands to module
   delay(1000);
   establishConnection("AT+RST", 5000);
   delay(1000);
+
   findIp(5000);
-  if (!No_IP)
-  {
-    Serial.println("Connecting Wifi....");
-    establishConnection("AT+CWJAP=\"" + SSID + "\",\"" + PWD + "\"", 7000); //provide your WiFi username and password here
-  }
-  else
-  {
+ 
+  if (!No_IP) {
+      Serial.println("Connecting Wifi....");
+        establishConnection("AT+CWJAP=\"" + SSID + "\",\"" + PWD + "\"", 7000); //provide your WiFi username and password here
   }
   Serial.println("Wifi Connected");
   showIP();
