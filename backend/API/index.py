@@ -52,3 +52,19 @@ def get_filtered_data():
     # for y in x:
     #         print(y["text"])
     return json.dumps(data, indent=2, default=json_util.default)
+
+@app.route("/send-workout-summary")
+def send_workout_summary():
+    data = request.json
+    CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
+    x = data["workout-length"]
+    y = data["timestamp"]
+    client = MongoClient(CONNECTION_STRING)
+    myCol = client['4FUN']
+    table = myCol["workout-summary"]
+    item = {
+        "workout-length": x,
+        "timestamp": y
+    }
+    table.insert_one(item)
+    return jsonify(data)
