@@ -21,3 +21,5 @@ export function goalTranslater(num) {
             return { name: "Beginner", id: 1, repxsets: "3 sets x 5 reps", icon: IoFootstepsOutline, selected: true }
     }
 }
+
+export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

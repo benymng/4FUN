@@ -13,9 +13,35 @@ import { goalTranslater } from "../resources/function";
 
 
 export const Exit = (props) => {
+    var ran = false;
     const location = useLocation();
     const [goal, setGoal] = useState(location.state.goal);
     const [time, setTime] = useState(location.state.time);
+
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [postId, setPostId] = useState(null);
+
+    useEffect(() => { 
+        if (!ran) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "workoutLength": time,
+                    "timestamp": Date.now()
+                })
+            };
+            fetch('https://4fun-pi.vercel.app/send-workout-summary', requestOptions)
+                .then(response => response.json())
+                .then(data => setPostId(data.id))
+                .catch(error => {
+                    console.log(error);
+                }).finally(setLoading(false));
+            ran = true;
+        }
+    }, [])
 
     return <div className="h-screen bg-black p-4 grid">
         <div className="row-span-1">
@@ -44,6 +70,3 @@ export const Exit = (props) => {
 };
 
 export default Exit;
-
-
-//send-workout-summary
