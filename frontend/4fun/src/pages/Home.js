@@ -3,10 +3,10 @@ import Navigation from '../components/Navigation.js';
 import Suggested from "../components/Suggested.js";
 import Motivation from "../components/Motivation.js";
 import Button from "../components/Button.js";
+import { goalTranslater } from "../resources/function.js";
 
 const Home = () => {
   const [selectedGoal, setSelectedGoal] = useState(1);
-
   return (
     <div className="h-screen bg-black p-4 grid">
       <div className="row-span-1">
@@ -20,7 +20,7 @@ const Home = () => {
       </div>
       <Suggested className="row-span-3" setGoal={setSelectedGoal} />
       <Motivation className="row-span-4" />
-      <center><Button name="START" path="/live" className="row-span-1" goal={ selectedGoal } time={0} /></center>
+      <center><Button name="START" path="/live" className="row-span-1" goal={selectedGoal} time={0}/></center>
       <Navigation className="row-span-1 h-20"/>
     </div>
   );

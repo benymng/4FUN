@@ -8,17 +8,12 @@ export const NavButton = (props) => {
         path: props.path,
         icon: props.icon,
         color: props.color ? "text-green outline-green hover:bg-green" : "text-white outline-white hover:bg-white",
-        params: props.params
+        
     });
-
     let navigate = useNavigate();
     const routeChange = () => {
-        navigate(State.path, {
-            state: {
-                goal: State.params
-            }
-        });
-        props.func();
+        navigate(State.path);
+        if (props.func) { props.func() };
     }
 
     return (
