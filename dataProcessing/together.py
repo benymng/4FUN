@@ -120,11 +120,16 @@ accelY = secondderivative.copy()
 #printGraph(velocityX, velocityY, "first derivative / velocity")
 #printGraph(accelX, accelY, "second derivative / acceleration")
 
+thirdderivative = derivative(xValues, secondderivative)
+xValues.pop()
+thirdDerX = xValues.copy()
+thirdDerY = thirdderivative.copy()
+
 targetValue = yValues[0] - repLength # we assume the first datapoint is the resting position
 # targetValue = yValues[0] + repLength # we assume the first datapoint is the resting position
 goodReps = findReps(distanceY, targetValue)
 
-#at the end we have distanceX, distanceY, velocityX, velocityY, accelX, accelY, and goodReps as things to return
+#at the end we have distanceX, distanceY, velocityX, velocityY, accelX, accelY, thirdDerX, thirdDerY and goodReps as things to return
 
 
 
