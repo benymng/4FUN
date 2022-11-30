@@ -25,7 +25,7 @@ def get_raw_data():
 
 @app.route('/push-data/<dataType>', methods=['POST'])
 def sendFilteredData(dataType):
-    print(dataType)
+    # print(dataType)
     data = request.json
     CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
     x = data["data"]
@@ -38,14 +38,14 @@ def sendFilteredData(dataType):
     table.insert_one(item)
     return jsonify(data)
 
-@app.route("/get-filtered-data")
-def get_filtered_data():
+@app.route("/get-filtered-data/<dataType>")
+def get_filtered_data(dataType):
     CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
     client = MongoClient(CONNECTION_STRING)
     myCol = client['4FUN']
     # print(myCol.getCollectionNames())
     # print(client.list_database_names())
-    table = myCol["filtered-data"].find()
+    table = myCol[dataType].find()
     data = list(table)
     # print(x)
     # for y in x:
@@ -56,7 +56,7 @@ def get_filtered_data():
 def send_workout_summary():
     data = request.json
     CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
-    x = data["workout-length"]
+    x = data["workoutLength"]
     y = data["timestamp"]
     client = MongoClient(CONNECTION_STRING)
     myCol = client['4FUN']
