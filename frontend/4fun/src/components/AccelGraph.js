@@ -68,6 +68,10 @@ export const AccelGraph = () => {
                         ticks: {
                             stroke: '#ffffff',
                         },
+                        tickLabels: {
+                            color: "transparent",
+                            fill: "transparent"
+                        }
                     }}
                     standalone={false}
                 />
@@ -81,6 +85,10 @@ export const AccelGraph = () => {
                         ticks: {
                             stroke: '#ffffff',
                         },
+                        tickLabels: {
+                            color: "transparent",
+                            fill: "transparent"
+                        }
                     }}
                     standalone={false}
                 />
