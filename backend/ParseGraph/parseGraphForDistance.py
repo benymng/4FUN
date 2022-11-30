@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import os
 from bs4 import BeautifulSoup
 import requests
+from flask_pymongo import PyMongo
+from pymongo import MongoClient
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -28,10 +30,11 @@ def main():
     plt.ylabel("Distance (cm)") 
     plt.plot(x,y) 
     plt.show()
+    sendToDatabase(accel)
 
 def getData():
     global numWords
-    url = "http://127.0.0.1:5500/backend/ParseGraph/index.html" # replace with IP from arduino
+    url = "http://127.0.0.1:5500/ParseGraph/index.html" # replace with IP from arduino
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     text = soup.get_text(" ", strip=True).lower().split()
@@ -47,6 +50,17 @@ def getData():
             numWords = numWords + 1
 
     return numWords
+
+def sendToDatabase(data):
+    CONNECTION_STRING = "mongodb+srv://Ben:PASSWORD@cluster0.qtjn2.mongodb.net/?retryWrites=true&w=majority"
+    # CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
+    client = MongoClient(CONNECTION_STRING)
+    myCol = client['4FUN']
+    table = myCol["raw-data"]
+    item = {
+        "data": data,
+    }
+    table.insert_one(item)
 
 if __name__ == '__main__':
     main()
