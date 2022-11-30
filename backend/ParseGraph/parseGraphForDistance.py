@@ -31,7 +31,7 @@ def main():
 
 def getData():
     global numWords
-    url = "http://127.0.0.1:5500/" # replace with IP from arduino
+    url = "http://127.0.0.1:5500/backend/ParseGraph/index.html" # replace with IP from arduino
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     text = soup.get_text(" ", strip=True).lower().split()
@@ -47,34 +47,6 @@ def getData():
             numWords = numWords + 1
 
     return numWords
-
-def get_database():
-    CONNECTION_STRING = (f'mongodb+srv://Ben:{os.getenv("MONGO_PASSWORD")}@cluster0.qtjn2.mongodb.net/?retryWrites=true&w=majority')
-    client = MongoClient(CONNECTION_STRING)
-    # print(client.list_database_names())
-    return client['4FUN']
-
-def insert_into_database(item):
-    dbname = get_database()
-    myCol = dbname["newTest"]
-
-    # collection_name = dbname["testing"]
-
-    x = myCol.insert_one(item)
-    print(x.inserted_id)
-    # collection_name.insert_one(item)
-
-def getData():
-    url = "https://www.w3schools.com/html/html_basic.asp"
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    text = soup.find_all('h2')
-    for one in text:
-        item = {
-            "text": one.get_text()
-        }
-        print(item)
-        insert_into_database(item)
 
 if __name__ == '__main__':
     main()
