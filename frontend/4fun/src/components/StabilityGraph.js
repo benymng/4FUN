@@ -1,9 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryTheme, VictoryTooltip, VictoryGroup, VictoryScatter } from "victory";
+import { Bars } from 'react-loader-spinner';
 
 
 export const StabilityGraph = () => {
+    const [graphcss, setGraphcss] = useState("hidden");
+    const [loadcss, setLoadcss] = useState("block");
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -38,7 +42,6 @@ export const StabilityGraph = () => {
         () => {
             if (thirdDerX && thirdDerY) {
                 let temp = [];
-                setStability([{ x: thirdDerX[thirdDerX.length - 1]["data"][0], y: thirdDerY[thirdDerY.length - 1]["data"][0] }]);
                 for (var i = 0; i < Math.min(thirdDerX[thirdDerX.length - 1]["data"].length - 1, thirdDerY[thirdDerY.length - 1]["data"].length - 1); i++) {
                     temp.push({
                         x: thirdDerX[thirdDerX.length - 1]["data"][i],
@@ -48,6 +51,8 @@ export const StabilityGraph = () => {
                 if (temp != stability) {
                     setStability(temp);
                 }
+                setLoadcss("hidden");
+                setGraphcss("block");
             }
         },
         [thirdDerX])
@@ -57,12 +62,14 @@ export const StabilityGraph = () => {
 
 
   return (
-      <div className="grid w-auto m-0 overflow-scroll h-48">
-          <VictoryChart padding={{ left: 80, right: 40, top: 0, bottom: 20 }} height={300} width={600}>
+      <div className="h-48 grid place-items-center">
+          <div className={loadcss}><Bars color="#B8F993" height="50" width="50" /></div>
+          <div className={`grid w-auto h-48 m-0 overflow-scroll transition-all duration-100 ` + graphcss}>
+           <VictoryChart padding={{ left: 60, right: 40, top: 0, bottom: 10 }} height={300} width={600}>
               <VictoryAxis
                   label="Time (s)"
                   style={{
-                      axisLabel: { fill: "#ffffff", fontSize: 30, padding: 130 },
+                      axisLabel: { fill: "#ffffff", fontSize: 25, padding: 130 },
                       axis: {
                           stroke: '#ffffff',
                       },
@@ -79,7 +86,7 @@ export const StabilityGraph = () => {
               <VictoryAxis dependentAxis
                   label="Rep Stability"
                   style={{
-                      axisLabel: { fill: "#ffffff", fontSize: 30, padding: 30 },
+                      axisLabel: { fill: "#ffffff", fontSize: 25, padding: 15 },
                       axis: {
                           stroke: '#ffffff',
                       },
@@ -100,7 +107,7 @@ export const StabilityGraph = () => {
                   <VictoryLine style={{ data: { stroke: "#B8F993", strokeWidth: 2, strokeLinecap: "round" } }} />
               </VictoryGroup>
           </VictoryChart>
-      </div>
+      </div></div>
   )
 }
 

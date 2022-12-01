@@ -14,7 +14,7 @@ export const Motivation = () => {
     })
 
     return (
-        <h1 className="text-white text-md font-extrabold h-20 animate-type text-brand-accent will-change-transform"><center>{`"` + quotes[quote] + `"`}</center></h1>
+        <h1 className="text-white text-md font-extrabold h-20 lg:mt-8 animate-type text-brand-accent will-change-transform"><center>{`"` + quotes[quote] + `"`}</center></h1>
   )
 }
 

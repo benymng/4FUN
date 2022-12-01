@@ -26,8 +26,8 @@ export const Suggested = (props) => {
     }, [selectedGoal])
     
   return (
-    <div className="grid grid-cols-7 pr-1 place-items-start">
-          <h1 className="col-span-1 text-xl text-lightGrey font-extrabold">S<br />U<br />G<br />G<br />E<br />S<br />T<br />E<br />D</h1>
+    <div className="grid grid-cols-7 pr-1 place-items-start lg:place-items-center lg:grid-cols-6">
+          <h1 className="col-span-1 text-xl text-lightGrey font-extrabold lg:hidden">S<br />U<br />G<br />G<br />E<br />S<br />T<br />E<br />D</h1>
           <div className="col-span-6 grid grid-rows-1 grid-cols-2 place-items-center gap-3">
               {goals.map(goal => 
                   <Goal name={goal.name} key={goal.id} id={goal.id} selected={goal.selected}  repxsets={goal.repxsets} icon={goal.icon} className="row-span-1 col-span-1" setSelectedGoal={setSelectedGoal}/>)}

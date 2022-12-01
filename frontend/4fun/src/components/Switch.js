@@ -25,8 +25,8 @@ export const Switch = (props) => {
             <button
                 onClick={(e) => handleClick(e)}
                 className={`text-green hover:text-black outline-green
-            transition-all duration-300 font-bold text-sm p-2 rounded-full
-            outline outline-3 inline-block ` + switchState.color}>
+            transition-all duration-300 font-bold text-sm p-1.5 rounded-full
+            outline outline-1 inline-block ` + switchState.color}>
                 {props.name}
             </button>
         </div>

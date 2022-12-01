@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import { goalTranslater } from '../resources/function';
 
 export const Button = (props) => {
     const [buttonState, setButtonState] = useState({

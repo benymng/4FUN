@@ -9,16 +9,16 @@ const Home = () => {
   const [selectedGoal, setSelectedGoal] = useState(1);
   return (
     <div className="h-screen bg-black p-4 grid">
-      <div className="row-span-1">
+      <div className="row-span-1  place-self-start lg:place-self-center">
         <h1 className="text-white text-2xl font-extrabold inline-block">Start Your&nbsp;</h1>
         <h1 className="text-green text-2xl font-extrabold inline-block">Workout</h1>
       </div>
-      <div className="row-span-1">
+      <div className="row-span-1 place-self-start lg:place-self-center">
         <h1 className="text-white text-md font-extrabold inline-block">What is your&nbsp;</h1>
         <h1 className="text-green text-md font-extrabold inline-block">goal&nbsp;</h1>
         <h1 className="text-white text-md font-extrabold inline-block"> for today's workout?</h1>
       </div>
-      <Suggested className="row-span-3" setGoal={setSelectedGoal} />
+      <Suggested className="row-span-3 place-self-start lg:place-self-center" setGoal={setSelectedGoal} />
       <Motivation className="row-span-4" />
       <center><Button name="START" path="/live" className="row-span-1" goal={selectedGoal} time={0}/></center>
       <Navigation className="row-span-1 h-20"/>
