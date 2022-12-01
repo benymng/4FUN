@@ -46,7 +46,7 @@ export const Stats = () => {
   useEffect(() => { 
     if (stdDev > 6000) {
       setSuggestion("Too Difficult");
-    } else if (stdDev > 4000) {
+    } else if (stdDev > 5000) {
       setSuggestion("Appropriate");
     } else {
       setSuggestion("Too Easy");

@@ -86,7 +86,7 @@ export const Tracker = (props) => {
     }, [props.running]);
 
   return (
-      <div className="justify-self-center place-items-center h-72 w-72 overflow-hidden" id="parent">
+      <div className="justify-self-center place-items-center h-72 w-72 overflow-visible" id="parent">
           <div className="grid justify-items-center pt-16 gap-2">
               <h1 className="row-span-1 text-white text-lg font-extrabold z-50">{tracker.running ? "Lat Pulldown" : "Workout Paused"}</h1>
               <Timer className="row-span-2 z-50" running={tracker.running} func={props.func} />
