@@ -20,7 +20,7 @@ export const GraphDisplay = () => {
         setSelectedDisplay(choice);
     }
   return (
-      <div className="w-auto m-0 grid h-64">
+      <div className="w-auto m-0 grid h-60 lg:grid-cols-2">
           {React.createElement(displayGraph[selectedDisplay])}
           <div className="grid grid-cols-3 place-items-center gap-1 self-center">
               <Switch className="col-span-1 inline-block" name="Distance" id={ 0} selected={selectedDisplay} func={switchGraph} />

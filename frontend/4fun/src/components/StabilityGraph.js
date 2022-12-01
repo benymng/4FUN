@@ -62,14 +62,14 @@ export const StabilityGraph = () => {
 
 
   return (
-      <div className="h-48 grid place-items-center">
+      <div className="h-48 grid place-items-center lg:h-40 ">
           <div className={loadcss}><Bars color="#B8F993" height="50" width="50" /></div>
-          <div className={`grid w-auto h-48 m-0 overflow-scroll transition-all duration-100 ` + graphcss}>
+          <div className={`grid w-auto h-52 m-0 lg:h-40 overflow-scroll transition-all duration-100 ` + graphcss}>
            <VictoryChart padding={{ left: 60, right: 40, top: 0, bottom: 10 }} height={300} width={600}>
               <VictoryAxis
                   label="Time (s)"
                   style={{
-                      axisLabel: { fill: "#ffffff", fontSize: 25, padding: 130 },
+                      axisLabel: { fill: "#ffffff", fontSize: 20, padding: 130 },
                       axis: {
                           stroke: '#ffffff',
                       },
@@ -86,7 +86,7 @@ export const StabilityGraph = () => {
               <VictoryAxis dependentAxis
                   label="Rep Stability"
                   style={{
-                      axisLabel: { fill: "#ffffff", fontSize: 25, padding: 15 },
+                      axisLabel: { fill: "#ffffff", fontSize: 20, padding: 15 },
                       axis: {
                           stroke: '#ffffff',
                       },

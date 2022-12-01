@@ -62,14 +62,14 @@ export const DistanceGraph = () => {
 
 
     return (
-        <div className="h-48 grid place-items-center">
+        <div className="h-48 grid place-items-center lg:h-40 ">
             <div className={loadcss}><Bars color="#B8F993" height="50" width="50" /></div>
-      <div className={`grid w-auto h-48 m-0 overflow-scroll transition-all duration-100 ` + graphcss}>
+            <div className={`grid w-auto h-48 lg:h-40 m-0 overflow-scroll transition-all duration-100 ` + graphcss}>
           <VictoryChart padding={{ left: 80, right: 40, top: 0, bottom: 60 }} height={300} width={600}>
               <VictoryAxis
                   label="Time (s)"
                   style={{
-                      axisLabel: { fill: "#ffffff", fontSize: 25, padding: 30 },
+                      axisLabel: { fill: "#ffffff", fontSize: 20, padding: 30 },
                       axis: {
                           stroke: '#ffffff',
                       },
@@ -86,7 +86,7 @@ export const DistanceGraph = () => {
               <VictoryAxis dependentAxis
                   label="Distance (cm)"
                   style={{
-                      axisLabel: { fill: "#ffffff", fontSize: 25, padding: 30 },
+                      axisLabel: { fill: "#ffffff", fontSize: 20, padding: 30 },
                       axis: {
                           stroke: '#ffffff',
                       },

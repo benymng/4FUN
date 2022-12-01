@@ -52,14 +52,14 @@ export const RepBar = () => {
 
 
     return (
-        <div className="h-36 grid place-items-center">
+        <div className="h-36 grid place-items-center lg:h-40 ">
             <div className={loadcss}><Bars color="#B8F993" height="50" width="50" /></div>
-            <div className={`grid w-auto h-36 m-0 overflow-scroll transition-all duration-100 ` + graphcss}>
-                <VictoryChart padding={{ left: 80, right: 80, top: 10, bottom: 60 }} height={200} width={600}>
+            <div className={`grid w-auto h-36 m-0 lg:h-40 overflow-scroll transition-all duration-100 ` + graphcss}>
+                <VictoryChart padding={{ left: 60, right: 80, top: 10, bottom: 50 }} height={200} width={600}>
                     <VictoryAxis
-                        label="Time (s)"
+                        label="Set"
                         style={{
-                            axisLabel: { fill: "#ffffff", fontSize: 25, padding: 30 },
+                            axisLabel: { fill: "#ffffff", fontSize: 20, padding: 30 },
                             axis: {
                                 stroke: '#ffffff',
                             },
@@ -74,9 +74,9 @@ export const RepBar = () => {
                         standalone={false}
                     />
                     <VictoryAxis dependentAxis
-                        label="Distance (cm)"
+                        label="Reps"
                         style={{
-                            axisLabel: { fill: "#ffffff", fontSize: 25, padding: 30 },
+                            axisLabel: { fill: "#ffffff", fontSize: 20, padding: 30 },
                             axis: {
                                 stroke: '#ffffff',
                             },

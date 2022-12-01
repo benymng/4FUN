@@ -18,7 +18,7 @@ export const BarDisplay = () => {
         setSelectedDisplay(choice);
     }
   return (
-      <div className="w-auto m-0 grid h-40">
+      <div className="w-auto m-0 grid h-40 lg:grid-cols-2 lg:h-60">
           {React.createElement(displayGraph[selectedDisplay])}
           <div className="grid grid-cols-2 place-items-center gap-0 self-center">
               <Switch className="col-span-1 inline-block" name="Time" id={0} selected={selectedDisplay} func={switchGraph} />
