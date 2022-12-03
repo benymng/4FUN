@@ -18,9 +18,9 @@ def postData(array, dataType):
     # print(x.text)
 
 #convert string to list
-def convert(string):
-    li = list(string.split(" "))
-    return li
+# def convert(string):
+#     li = list(string.split(" "))
+#     return li
 
 #takes the derivative of a dataset
 def derivative(xValues, yValues):
@@ -40,12 +40,12 @@ def printGraph(x, y, title):
     plt.show()
 
 #changing the given string to usable lists
-def StringToList(givenString):
-    givenList = convert(givenString) #converts str to a list of strings
-    repNumber = givenList.pop(0) #removes the "!x"
-    repNumber = repNumber[1:] #removes the "!" from repNumber
-    givenList = list(map(int,givenList)) #typecasts the values in givenList to int
-    return givenList, repNumber
+# def StringToList(givenString):
+#     givenList = convert(givenString) #converts str to a list of strings
+#     repNumber = givenList.pop(0) #removes the "!x"
+#     repNumber = repNumber[1:] #removes the "!" from repNumber
+#     givenList = list(map(int,givenList)) #typecasts the values in givenList to int
+#     return givenList, repNumber
 
 #filtering the data for the extraneous values
 def filterData(x, y, givenList, extraneousMin):
@@ -161,6 +161,7 @@ postData(goodReps, "goodReps")
 # printGraph(distanceX, distanceY, "distance")
 # printGraph(velocityX, velocityY, "first derivative / velocity")
 # printGraph(accelX, accelY, "second derivative / acceleration")
+
 #print(given)
 #print(givenList)
 #print(xValues)
